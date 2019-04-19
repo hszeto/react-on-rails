@@ -43,6 +43,9 @@ class App extends React.Component {
   render () {
     return (
       <React.Fragment>
+        <div style={{textAlign:'center'}}>
+        <h2>React-Rails Template with React-Router</h2>
+        <hr />
         <Router history={routeHistory} >
           <div>
             <nav>
@@ -78,6 +81,7 @@ class App extends React.Component {
         </Router>
 
         { this.state.errorMsg }
+        </div>
       </React.Fragment>
     );
   }
