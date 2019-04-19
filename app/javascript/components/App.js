@@ -3,8 +3,10 @@ import { Router, Link, Redirect, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from "history";
 
 import AuthButton from './AuthButton';
+import HelloWorld from './HelloWorld';
 import Private from './Private';
 import Public from './Public';
+import ProtectedRoute from './ProtectedRoute';
 
 const routeHistory = createBrowserHistory();
 
@@ -59,13 +61,23 @@ class App extends React.Component {
             <Route path='/public'
               component={ ()=><Public message='No secret here.'/> }
             />
-            <Route path='/private'
-              component={ ()=><Private history={routeHistory} isAuthenticated={this.state.isAuthenticated} setErrorMsg={this.setErrorMsg} /> }
+
+            <ProtectedRoute
+              exact path="/private"
+              component={ Private }
+              isAuthenticated={this.state.isAuthenticated}
+              setErrorMsg={this.setErrorMsg}
+            />
+            <ProtectedRoute
+              exact path="/hello"
+              component={ ()=><HelloWorld greeting='YO YO YO!'/> }
+              isAuthenticated={this.state.isAuthenticated}
+              setErrorMsg={this.setErrorMsg}
             />
           </Switch>
         </Router>
 
-        {this.state.errorMsg}
+        { this.state.errorMsg }
       </React.Fragment>
     );
   }
